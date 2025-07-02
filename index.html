@@ -3,15 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="icon" href="imgs/logo.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="css/style.css">
 
-    <title>Yummy</title>
+    <title>Movie App</title>
 </head>
 <body>
+
+
+    <div class="loading">
+        <i class="fa-solid fa-spin fa-circle-notch fa-5x"></i>
+    </div>
+
     
+    <div class="side-nav h-100 position-fixed d-flex">
+        <div  class="nav-content d-flex flex-column justify-content-around px-4 bg-black h-100">
+            <ul class="list-unstyled overflow-hidden">
+                <li class="position-relative"><a href="" onclick="event.preventDefault(); getNowPlaying();">Now Playing</a></li>
+                <li class="pt-4 position-relative"><a href="" onclick="event.preventDefault(); getPopular();">Popular</a></li>
+                <li class="pt-4 position-relative"><a href="" onclick="event.preventDefault(); getTopRated();">Top Rated</a></li>
+                <li class="pt-4 position-relative"><a href="" onclick="event.preventDefault(); getTrending();">Trending</a></li>
+                <li class="pt-4 position-relative"><a href="" onclick="event.preventDefault(); getUpcoming();">Upcoming</a></li>
+                <li onclick="contactPage()" class="pt-4 position-relative"><a href="#Contact">Contact Us</a></li>
+            </ul>
+            <div class="copyrights">
+                <div class="icons">
+                    <i class="fa-brands fa-facebook-f ps-3"></i>
+                    <i class="fa-brands fa-twitter ps-3"></i>
+                    <i class="fa-solid fa-globe ps-3"></i>
+                </div>
+                <p class="pt-3">Copyright © 2022 All Rights <br>Reserved.
+                <br>
+                Created by <a href="https://github.com/Abdelrahmanjr246" class="link-danger" target="_blank">Abdelrahman Mostafa</a>
+                </p>
+            </div>
+        </div>
+        <div class="nav-header d-flex flex-column justify-content-between py-4 px-3 text-center bg-white text-black h-100">
+            <img src="./imgs/logo.png" alt="Yummy Logo"  class="logo">
+            <i class="fa-solid open-close-icon fa-bars fa-2x"></i>
+            <div class="d-flex flex-column gap-1">
+                <i class="fa-solid fa-globe"></i>
+                <i class="fa-solid fa-share-nodes"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="scrollToTop">
+        <div class="icon">
+            <i class="fa-solid fa-arrow-up"></i>
+        </div>
+    </div>
+
+
+    <section class="container py-5">
+        <div class="container" id="searchBar">
+            <input onkeyup='search(this.value)' id="search" type="search" placeholder="Search" class="form-control w-50 mx-auto bg-transparent rounded-pill text-white shadow-none border-white px-3">
+        </div>
+        
+        <div class="inner-loading-spinner">        <i class="fa-solid fa-spin fa-circle-notch fa-5x"></i>
+</div>
+
+        <div class="position-relative">
+            <div class="inner-loading"></div>
+            <div id="rowData" class="row g-4 mt-3 ms-3 text-white">
+            
+            </div>
+        </div>
+    
+        <div id="Contact" class="container text-center pt-5">
+            <h2 class="text-center py-3">Contact Us</h2>
+            <div class="row pt-2 px-5 justify-content-center">
+                <div class="col-md-6">
+                    <input onkeyup="inputsValidation()" id='nameInput' type="text" class="form-control mb-1" placeholder="Enter Your Name">
+                    <p id='nameMsg' class="text-danger d-none text-start">Invalid Name , only Characters allowed</p>
+                </div>
+                <div class="col-md-6">
+                    <input onkeyup="inputsValidation()" id='emailInput' type="email" class="form-control mb-1" placeholder="Enter Your Email">
+                    <p id='emailMsg' class="text-danger d-none text-start">Invalid Email , try example@domain.com</p>
+                </div>
+                <div class="col-md-6">
+                    <input onkeyup="inputsValidation()" id='phoneInput' type="text" class="form-control mb-1" placeholder="Enter Your Phone">
+                    <p id='phoneMsg' class="text-danger d-none text-start">Invalid Phone Number</p>
+                </div>
+                <div class="col-md-6">
+                    <input onkeyup="inputsValidation()" id='ageInput' type="number" class="form-control mb-1" placeholder="Enter Your Age">
+                    <p id='ageMsg' class="text-danger d-none text-start">Your age must be over 16+</p>
+                </div>
+                <div class="col-md-6">
+                    <input onkeyup="inputsValidation()" id='passwordInput' type="password" class="form-control mb-1" placeholder="Enter Your Password">
+                    <p id='passwordMsg' class="text-danger d-none text-start">password must contain numbers & letters at least 8 character</p>
+                </div>
+                <div class="col-md-6">
+                    <input onkeyup="inputsValidation()" id='repasswordInput' type="password" class="form-control mb-1" placeholder="Confirm Your Password">
+                    <p id='repasswordMsg' class="text-danger d-none text-start">Password not match</p>
+                </div>
+            </div>
+                <button id="submitBtn" type="submit" class="btn rounded-2 form-btn animated-submit myBtn px-2 my-3">Submit</button>
+        </div>
+    </section>
+        
 
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
